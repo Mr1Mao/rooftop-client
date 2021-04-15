@@ -1,0 +1,9 @@
+.labelPage-enter-active, .labelPage-leave-active {
+    transition: all 0.2s;
+  }
+  
+.labelPage-enter, .labelPage-leave-active {
+    transform: translateX(10px);
+    // transition: all 0.2s;
+    opacity: 0;
+  }

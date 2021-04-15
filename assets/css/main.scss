@@ -1,0 +1,13 @@
+@import "init";
+@import "animation";
+
+//公共变量
+$header_bgc:#F8F8F8;  //菜单栏背景色
+$basic_color:#232323; //深色基本色调(底部导航背景色)
+$def_bgc:#F2F2F2; //默认背景色
+$def_font_family:"Segoe UI", SegoeUI, "Helvetica Neue", Helvetica, "Microsoft YaHei";//默认字体
+
+//公共设置
+body{
+    background-color: $def_bgc;
+}
