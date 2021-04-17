@@ -140,18 +140,6 @@ import RfDialog from "../../components/rf-dialog.vue";
 export default {
   components: { rfAvatarUpload, RfDialog },
   transition: "labelPage",
-  //   async asyncData(context) {
-  //   // console.info("index", context);
-  //   try {
-  //     let response = await this.$request.getUser();
-  //     if (response.status == 200 && response.data.status == 0) {
-  //       this.$store.commit("getUserInfo", response.data.data);
-  //     }
-  //     // return { articlesData: res.data.data };
-  //   } catch (err) {
-  //     console.info(err);
-  //   }
-  // },
   data() {
     return {
       form: {
@@ -255,11 +243,6 @@ export default {
         }
       });
     },
-    // handlePictureCardPreview(file) {
-    //     this.form.avatar = file.url;
-    //     console.log(this.form.avatar)
-    //     // this.dialogVisible = true;
-    //   },
     //获取用户信息
     async getUser() {
       let response = await this.$request.getUser();
@@ -371,11 +354,6 @@ export default {
     },
     // }),
   },
-  // watch:{
-  //   EMail(val,oldVal){
-
-  //   }
-  // }
 };
 </script>
 

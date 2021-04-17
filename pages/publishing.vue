@@ -130,6 +130,7 @@ import rfEditor from "../components/rf-editor.vue";
 export default {
   components: { rfEditor },
   layout: "editor-layouts",
+  middleware: 'auth',
   async asyncData(context) {
 
     try {

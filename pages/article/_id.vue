@@ -35,13 +35,17 @@
       </div>
     </div>
     <div class="paging">
-      <div class="previous" >
-        <nuxt-link :to="'/article/' + nearbyArticle[0]" v-if="nearbyArticle[0] != null"
+      <div class="previous">
+        <nuxt-link
+          :to="'/article/' + nearbyArticle[0]"
+          v-if="nearbyArticle[0] != null"
           ><i class="el-icon-arrow-left"></i><span>上一页</span></nuxt-link
         >
       </div>
-      <div class="next" >
-        <nuxt-link :to="'/article/' + nearbyArticle[1]" v-if="nearbyArticle[1] != null"
+      <div class="next">
+        <nuxt-link
+          :to="'/article/' + nearbyArticle[1]"
+          v-if="nearbyArticle[1] != null"
           ><span>下一页</span><i class="el-icon-arrow-right"></i
         ></nuxt-link>
       </div>
@@ -78,12 +82,19 @@ export default {
       let res = await context.app.$request.getArticle({
         articleId: context.route.params.id,
       });
-      return {
-        article: res.data.data.article,
-        nearbyArticle: res.data.data.nearbyArticle,
-      };
+        console.log()
+      if (res.data.status == 0) {
+        return {
+          article: res.data.data.article,
+          nearbyArticle: res.data.data.nearbyArticle,
+        };
+      }else{
+         console.log("404")
+          // return redirect('/')
+      }
     } catch (err) {
       console.info(err);
+      // context.error()
     }
   },
   head() {
@@ -93,7 +104,7 @@ export default {
         {
           hid: "description",
           name: "description",
-          content: this.article.content,
+          content: this.article.brief,
         },
       ],
     };
