@@ -66,6 +66,10 @@
         >
       </div>
     </div>
+    <div class="comments">
+      <!-- <p>分享文章</p> -->
+      <rf-comments></rf-comments>
+    </div>
   </div>
 </template>
 
@@ -73,8 +77,9 @@
 import rfMark from "../../components/rf-mark.vue";
 import marked from "marked";
 import RfBanner from "../../components/rf-banner.vue";
+import RfComments from "../../components/rf-comments.vue";
 export default {
-  components: { rfMark, RfBanner },
+  components: { rfMark, RfBanner, RfComments },
   // auth: false, //无需登录
   async asyncData(context) {
     // console.log("啦啦啦",context.route.params.id)
@@ -82,15 +87,15 @@ export default {
       let res = await context.app.$request.getArticle({
         articleId: context.route.params.id,
       });
-        console.log()
+      console.log();
       if (res.data.status == 0) {
         return {
           article: res.data.data.article,
           nearbyArticle: res.data.data.nearbyArticle,
         };
-      }else{
-         console.log("404")
-          // return redirect('/')
+      } else {
+        console.log("404");
+        // return redirect('/')
       }
     } catch (err) {
       console.info(err);
@@ -190,8 +195,6 @@ export default {
     }
   }
   .share {
-    // height: 100px;
-
     width: 1120px;
     margin: 80px auto;
     // margin-top: 100px;
@@ -213,6 +216,10 @@ export default {
         margin: 0 20px;
       }
     }
+  }
+  .comments {                                                                                                                                                                                       
+    width: 1120px;
+    margin: 80px auto;
   }
 }
 </style>

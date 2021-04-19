@@ -569,6 +569,7 @@ export default {
       size: 1.4rem;
       weight: 600;
     }
+    
   }
   .ER-code {
     width: 160px;

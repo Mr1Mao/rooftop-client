@@ -1,3 +1,4 @@
+const env = require('./env')
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -51,7 +52,7 @@ export default {
   proxy: {
     // see Proxy section
     '/api': {
-      target: 'http://localhost:8081/',
+      target: env[process.env.MODE].ENV_API,
       // ws: true,
       changeOrigin: true,
       pathRewrite:{
@@ -67,14 +68,14 @@ export default {
   axios: {
     proxy: true,
     prefix: '/api',
-    baseURL: 'http://localhost:8081'
+    baseURL: env[process.env.MODE].ENV_API
     // baseURL: 'https://mock.yonyoucloud.com/mock/17387'
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: [/^element-ui/],
-    
+
   },
   router: {
     middleware: [
