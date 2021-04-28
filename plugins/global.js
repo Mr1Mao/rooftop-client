@@ -5,9 +5,9 @@ const tools = {
         Vue.prototype.tools = {
             formatDate(datetime) {
                 var date = null; //时间戳为10位需*1000，时间戳为13位的话不需乘1000
-                if(datetime.toString().length == 10){
+                if (datetime.toString().length == 10) {
                     date = new Date(datetime * 1000);
-                }else{
+                } else {
                     date = new Date(datetime);
                 }
                 var year = date.getFullYear(),
@@ -32,11 +32,14 @@ const tools = {
                 // 返回
                 return result;
             },
-            sort(data){
-                data.sort((a,b)=>{
-                    return a.id<b.id;
+            sort(data) {
+                data.sort((a, b) => {
+                    return a.id < b.id;
                 });
             },
+            trimStr(text) {
+                return text.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="reply" v-if="actionId == commentId">
+  <div class="reply" >
     <div :class="{ flex: !isCancelBtn }">
       <!-- 模式一 -->
       <div style="display: flex" v-if="isCancelBtn">
@@ -13,7 +13,7 @@
           style="flex: 1"
           type="textarea"
           :autosize="{ minRows: 1, maxRows: 4 }"
-          :placeholder="'回复 ' + replyBody.toUserName"
+          :placeholder="'回复 ' + $store.state.replyBody.toUsername"
           v-model="text"
         >
         </el-input>
@@ -32,7 +32,7 @@
         style="flex: 1"
         type="textarea"
         :autosize="{ minRows: 1, maxRows: 4 }"
-        :placeholder="'回复' + replyBody.toUserName"
+        :placeholder="'回复' + $store.state.replyBody.toUsername"
         v-model="text"
       >
       </el-input>
@@ -63,40 +63,10 @@ export default {
     };
   },
   methods: {
-    async submit() {
-      console.log(this.replyBody)
-      try {
-        let res = await this.$request.sendReply({
-         commentId:this.actionId,
-         replyType:this.replyBody.replyType,
-         replyId:this.replyBody.replyId,
-         toUser:{
-           userId:this.replyBody.toUserId,
-         },
-         fromUser:{
-           userId:this.$store.state.userInfo.userId
-         },
-         content:this.text,
-        });
-        if (res.data.status == 0) {
-          this.resBody = res.data.data;
-          this.resBody.fromUser = this.$store.state.userInfo;
-          this.resBody.toUser.userId = this.replyBody.toUserId;
-          this.resBody.toUser.username = this.replyBody.toUserName;
-          this.resBody.toUser.avater = this.replyBody.toUserAvatar;
-         console.log(res.data.data)
-        }else if (res.data.status == 403) {
-          this.$message.error("用户认证失败，请重新登录");
-        }
-      } catch (err) {
-        if (
-          err.response.data.status == 403 ||
-          err.response.data.data.status == 403
-        ) {
-          this.$message.error("登录认证已失效，请重新登录");
-        }
-        console.info(err);
-      }
+     submit() {
+      this.$parent.sendReply(this.text);
+      this.text = ""
+  
     },
     cancel() {
       this.$emit("update:actionId", "-1");
@@ -115,19 +85,8 @@ export default {
     commentId:{
       type:String
     },
-    replyBody:{
-      type:Object
-    },
-    //添加评论后放回给父组件的数据
-    resBody:{
-      type:Object
-    }
-    
   },
-  // watch:{
-  //   actionId(val, oldVal){
-  //   }
-  // }
+
 };
 </script>
 

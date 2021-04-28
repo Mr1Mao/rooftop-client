@@ -11,7 +11,16 @@ const state = () => ({
         client_secret: "112233",
         client_id: "client",
     },
-    // dialogVisible:false
+    //当前选中所要回复的评论
+    replyBody:{
+        replyType: 0,
+        replyId: "",
+        toUserId: "",
+        toUsername: "",
+        toUserAvatar:"",
+        commentId:"",
+        actionCommentIndex:0
+    }
 
 })
 
@@ -37,6 +46,17 @@ const mutations = {
 
     updateEmail(state, data){
         state.userInfo.email = data;
+    },
+
+    updateReplyBody(state, data){
+        state.replyBody.replyType = data.replyType;
+        state.replyBody.replyId = data.replyId;
+        state.replyBody.toUserId = data.toUserId;
+        state.replyBody.toUsername = data.toUsername;
+        state.replyBody.toUserAvatar = data.toUserAvatar;
+        state.replyBody.commentId = data.commentId;
+        state.replyBody.actionCommentIndex = data.actionCommentIndex;
+        
     },
     // updateDialogVisible(state, data){
     //     state.updateDialogVisible = data;

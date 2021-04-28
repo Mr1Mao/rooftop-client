@@ -63,7 +63,7 @@ export default {
           userId: this.$store.state.userInfo.userId,
         });
         if (res.data.data.articles.length == 0) {
-          this.msg = "没有更多";
+          this.msg = "没有更多了";
         } else {
           this.articlesData.articles = this.articlesData.articles.concat(
             res.data.data.articles

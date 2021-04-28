@@ -68,7 +68,8 @@
     </div>
     <div class="comments">
       <!-- <p>分享文章</p> -->
-      <rf-comments></rf-comments>
+      <!-- <rf-comments :articleId="$route.params.id"></rf-comments> -->
+      <rf-comments-2 :articleId="$route.params.id" ></rf-comments-2>
     </div>
   </div>
 </template>
@@ -78,8 +79,9 @@ import rfMark from "../../components/rf-mark.vue";
 import marked from "marked";
 import RfBanner from "../../components/rf-banner.vue";
 import RfComments from "../../components/rf-comments.vue";
+import RfComments2 from '../../components/comments/rf-comments-2.vue';
 export default {
-  components: { rfMark, RfBanner, RfComments },
+  components: { rfMark, RfBanner, RfComments, RfComments2 },
   // auth: false, //无需登录
   async asyncData(context) {
     // console.log("啦啦啦",context.route.params.id)

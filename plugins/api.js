@@ -1,4 +1,4 @@
-//1) 自定义函数
+ //1) 自定义函数
 const request = {
   //请求文章列表
   getArticles: (params) => {
@@ -105,6 +105,47 @@ const request = {
       method: "get",
       url: "/bg_image/?userId=" + userId,
       
+    })
+  },
+  //获取评论列表
+  getComments: (params) => {
+    // return axios.get('/bg_image', params)
+    return axios({
+      method: "get",
+      url: "/comments",
+      params
+    })
+  },
+  //获取回复列表
+  getReplies: (params) => {
+    // return axios.get('/bg_image', params)
+    return axios({
+      method: "get",
+      url: "/replies",
+      params
+    })
+  },
+  sendComment: (params) => {
+    return axios.post('/comment', params)
+
+  },
+  sendReply: (params) => {
+    return axios.post('/reply', params)
+  },
+  //删除评论
+  deleteComment:(params) => {
+    return axios({
+      method: "delete",
+      url: "/comment",
+      params
+    })
+  },
+  //删除回复
+  deleteReply:(params) => {
+    return axios({
+      method: "delete",
+      url: "/reply",
+      params
     })
   }
 

@@ -41,8 +41,7 @@
     </div>
     <div class="footer-bottom">
       <p class="w">
-        &copy Copyright 2021 rooftop Mao-BY-NC-SA 4.0 .Theme DukeYin by Duke Yin
-        All ights reserved.-滇ICP备14003777号-6
+        &copy Copyright 2021 rooftop author for Mao -浙ICP备2021009799号
       </p>
     </div>
   </div>
