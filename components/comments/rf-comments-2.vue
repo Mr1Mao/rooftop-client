@@ -88,7 +88,7 @@
               ></rf-reply-box-2>
             </transition>
             <!-- 加载reply更多 -->
-            <div v-if="item.replies.length != 0">
+            <div v-if="item.replies != null || item.replies != ''">
               <div
                 class="ac"
                 v-if="replyIsLoading && actionCommentIndex == index"

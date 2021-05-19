@@ -426,9 +426,23 @@ export default {
         tokenType: "bearer",
         scope: "all",
       };
+      let userInfo = {
+        accounts:"",
+        avatar:"",
+        email:"",
+        enabled:"",
+        gender:"",
+        likesList:[],
+        phone:"",
+        registrationTime:"",
+        resume:"",
+        roles:"",
+        userId:"",
+        username:""
+    };
       this.$router.push({ path: "/" });
       this.$store.commit("updateAuth", auth);
-      this.$store.commit("getUserInfo", "");
+      this.$store.commit("getUserInfo", userInfo);
       this.$store.commit("updateLoginstatus", false);
     },
     //登录

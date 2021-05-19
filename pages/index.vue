@@ -1,8 +1,9 @@
 <template>
   <div class="container">
     <el-carousel trigger="click" height="580px">
-      <el-carousel-item v-for="item in 4" :key="item">
-        <h3 class="small">{{ item }}</h3>
+      <el-carousel-item v-for="(item,index) in banner" :key="index" fit="contain">
+        <el-image :src="item.img"></el-image>
+        <!-- <h3 class="small"></h3> -->
       </el-carousel-item>
     </el-carousel>
     <div class="page-title">
@@ -68,6 +69,12 @@ export default {
     return {
       duration: 1000,
       articlesData: "",
+      banner:[
+        {img:"https://rooftop-1258887757.cos.ap-shanghai.myqcloud.com/system/pexels-pixabay-270488.jpg"},
+         {img:"https://rooftop-1258887757.cos.ap-shanghai.myqcloud.com/system/pexels-olia-danilevich-4974912.jpg"},
+          {img:"https://rooftop-1258887757.cos.ap-shanghai.myqcloud.com/system/pexels-markus-spiske-2061168.jpg"},
+           {img:"https://rooftop-1258887757.cos.ap-shanghai.myqcloud.com/system/pexels-nick-wehrli-3762284.jpg"}
+      ]
     };
   },
   methods: {

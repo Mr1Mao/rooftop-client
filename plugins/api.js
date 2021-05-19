@@ -147,6 +147,21 @@ const request = {
       url: "/reply",
       params
     })
+  },
+  //取消点赞
+  undolikes:(params) => {
+    return axios({
+      method: "delete",
+      url: "/likes",
+      params
+    })
+  },
+  dolikes:(params) =>{
+    return axios({
+      method: "post",
+      url: "/likes",
+      params
+    })
   }
 
 }

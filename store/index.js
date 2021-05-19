@@ -1,5 +1,18 @@
 const state = () => ({
-    userInfo: "",
+    userInfo: {
+        accounts:"",
+        avatar:"",
+        email:"",
+        enabled:"",
+        gender:"",
+        likesList:[],
+        phone:"",
+        registrationTime:"",
+        resume:"",
+        roles:"",
+        userId:"",
+        username:""
+    },
     isLogin: false,
     isShowLoginBox: false,
     auth: {
@@ -58,9 +71,9 @@ const mutations = {
         state.replyBody.actionCommentIndex = data.actionCommentIndex;
         
     },
-    // updateDialogVisible(state, data){
-    //     state.updateDialogVisible = data;
-    // }
+    updateLikesList(state, data){
+        state.userInfo.likesList = data;
+    }
 }
 
 // const getters = {

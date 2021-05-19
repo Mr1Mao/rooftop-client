@@ -16,19 +16,28 @@
       </div>
       <div class="interaction">
         <div class="interaction-item">
-          <i class="el-icon-star-off"> 66 </i>
-          <!-- el-icon-star-on -->
+          <i
+            class="el-icon-star-on"
+            @click="undoLike()"
+            v-if="$store.state.userInfo.likesList.indexOf(id) != -1"
+          >
+            {{ comment.likes }}
+          </i>
+          <i class="el-icon-star-off" @click="doLike()" v-else> {{ comment.likes }} </i>
         </div>
         <div
           class="interaction-item"
-          v-if="this.commentType != 'subComment' && comment.replies.length != 0"
+          v-if="
+            this.commentType != 'subComment' &&
+            (comment.replies != null || comment.replies != '')
+          "
         >
-          <i
+          <!-- <i
             class="el-icon-s-comment"
             @click="checkAllReplies(index, comment.commentId)"
           >
             查看回复
-          </i>
+          </i> -->
         </div>
         <div
           class="interaction-item"
@@ -138,13 +147,13 @@ export default {
      * 向父组件提交删除
      */
     sbumitRemove() {
-      this.$confirm("确认删除该评论？","提示",{
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
-                closeOnClickModal: false,
-                type: 'warning',
-                // center: true
-            })
+      this.$confirm("确认删除该评论？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        closeOnClickModal: false,
+        type: "warning",
+        // center: true
+      })
         .then((_) => {
           if (this.commentType == "comment") {
             this.$parent.removeComment(this.id, this.index);
@@ -154,6 +163,58 @@ export default {
           }
         })
         .catch((_) => {});
+    },
+    async doLike() {
+      try {
+        let type = this.commentType == "comment" ? 1 : 2;
+        let res = await this.$request.dolikes({
+          typeId: this.id,
+          type: type,
+        });
+        if (res.data.status == 0) {
+          let likesList = this.$store.state.userInfo.likesList
+          likesList.push(this.id)
+           this.comment.likes++;
+          this.$store.commit("updateLikesList", likesList);
+        } else if (res.data.status == 403) {
+          this.$message.error("用户认证失败，请重新登录");
+        }
+      } catch (err) {
+        console.log(err)
+        if (
+          err.response.data.status == 403 ||
+          err.response.data.data.status == 403
+        ) {
+          this.$message.error("登录认证已失效，请重新登录");
+        }
+      }
+    },
+    async undoLike() {
+      try {
+        let type = this.commentType == "comment" ? 1 : 2;
+        let res = await this.$request.undolikes({
+          typeId: this.id,
+          type: type,
+        });
+        if (res.data.status == 0) {
+          let likesList = this.$store.state.userInfo.likesList
+          //移除元素
+          let index = likesList.indexOf(this.id)
+          likesList.splice(index,1);
+          this.comment.likes--;
+          this.$store.commit("updateLikesList", likesList);
+        } else if (res.data.status == 403) {
+          this.$message.error("用户认证失败，请重新登录");
+        }
+      } catch (err) {
+         console.log(err)
+        if (
+          err.response.data.status == 403 ||
+          err.response.data.data.status == 403
+        ) {
+          this.$message.error("登录认证已失效，请重新登录");
+        }
+      }
     },
   },
 };
